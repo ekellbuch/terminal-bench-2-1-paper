@@ -51,99 +51,113 @@
 </header>
 
 <main>
-  <section class="wrap teaser">
-    <figure>
-      <img src="static/images/failure_taxonomy_figure.png" alt="Failure surfaces along the agentic-task lifecycle, from authoring through execution and verification.">
-      <figcaption><b>Failure surfaces along the agentic-task lifecycle.</b> From authoring to execution and verification, each stage can admit a failure that adds to benchmark maintenance debt. Blue marks instruction–verification mismatch, orange marks environment issues, and red marks task drift.</figcaption>
+  <section class="wrap">
+    <figure class="fig">
+      <a href="static/images/failure_taxonomy_figure.png"><img src="static/images/failure_taxonomy_figure.png" alt="Failure surfaces along the agentic-task lifecycle, from authoring through execution and verification."></a>
+      <figcaption><b>Failure surfaces along the agentic-task lifecycle.</b> Each stage, from authoring to execution and verification, can admit a failure that adds to benchmark maintenance debt.</figcaption>
     </figure>
+
+    <dl class="stats">
+      <div><dt>~30%</dt><dd>of Terminal-Bench 2.0 tasks had issues found by the audit</dd></div>
+      <div><dt>12 pts</dt><dd>largest accuracy shift for one agent after the repairs</dd></div>
+      <div><dt>ρ = 0.958</dt><dd>rank correlation of 19 agents between TB2.0 and TB2.1</dd></div>
+      <div><dt>&gt;50%</dt><dd>of failed trials end in a timeout, up to ~68% per harness</dd></div>
+    </dl>
   </section>
 
-  <section class="wrap stats" aria-label="Key numbers">
-    <div class="stat"><span class="num">~30%</span><span class="lbl">of Terminal-Bench 2.0 tasks had issues found by the audit</span></div>
-    <div class="stat"><span class="num">12 pts</span><span class="lbl">largest accuracy shift for one agent after the repairs</span></div>
-    <div class="stat"><span class="num">ρ = 0.958</span><span class="lbl">Spearman rank correlation of 19 agents between TB2.0 and TB2.1</span></div>
-    <div class="stat"><span class="num">&gt;50%</span><span class="lbl">of failed trials end in a timeout, up to ~68% for some harnesses</span></div>
-  </section>
-
-  <section class="wrap prose">
-    <h2>Abstract</h2>
-    <p>Coding agents are among the most economically consequential deployments of LLMs to date, so reliable evaluation matters more and more. Yet even benchmarks that are carefully validated at release can become stale. As models improve, they can discover valid solutions that existing verifiers reject, while changes to evaluation infrastructure can invalidate assumptions embedded in tasks and tests. We call the resulting accumulation of defects <em>benchmark maintenance debt</em>: a growing gap between benchmark scores and the capabilities they intend to measure.</p>
-    <p>We introduce a continuous-validation workflow for agentic benchmarks that combines community reports, task artifacts, agent traces, automated oracle checks, and human-gated repairs. We apply this workflow to Terminal-Bench&nbsp;2.0, a benchmark that underwent extensive human and LM-assisted review and red-teaming before release. Our audit identifies issues in roughly 30% of the benchmark, and we release the resulting repairs as Terminal-Bench&nbsp;2.1. These repairs change evaluation results: across agents, accuracy shifts by as much as 12 percentage points and leaderboard positions move by up to three ranks, even as the overall ranking remains highly correlated (Spearman ρ&nbsp;=&nbsp;0.958).</p>
-    <p>Beyond accuracy, we evaluate how resource allocation shapes benchmark conclusions. We show that fixed wall-clock and output-token budgets can materially change apparent agent performance: some large harness gaps at the default timeout shrink substantially when agents are given more time. These results show that benchmark maintenance is not only about repairing task artifacts; resource budgets are part of the measurement specification and must be validated alongside the tasks themselves.</p>
-  </section>
-
-  <section class="wrap prose">
-    <h2>Benchmark maintenance debt</h2>
-    <p>Agentic benchmarks are not static datasets. Over time they accumulate defects that decouple a model's score from the capability the benchmark is meant to measure. Terminal-Bench 2.0 went through human review, LM-assisted auditing, and exploit testing before release, yet within months its issue trackers held over 50 open reports tagged as task defects. The debt builds along two axes:</p>
-    <ul class="cards">
-      <li><h3>Fidelity debt</h3><p>Task designers encode assumptions about how agents will solve a task. Those assumptions break when agents find hardcoded solutions, substring-matching exploits, or valid solution paths the designer did not anticipate.</p></li>
-      <li><h3>Drift debt</h3><p>Tasks that depend on external state, such as packages, APIs, or websites, can break when that state changes after release. The resulting failures have nothing to do with agent capability.</p></li>
-    </ul>
+  <section class="band">
+    <div class="wrap prose">
+      <h2>Abstract</h2>
+      <p>Coding agents are among the most economically consequential deployments of LLMs to date, so reliable evaluation matters more and more. Yet even benchmarks that are carefully validated at release can become stale. As models improve, they can discover valid solutions that existing verifiers reject, while changes to evaluation infrastructure can invalidate assumptions embedded in tasks and tests. We call the resulting accumulation of defects <em>benchmark maintenance debt</em>: a growing gap between benchmark scores and the capabilities they intend to measure.</p>
+      <p>We introduce a continuous-validation workflow for agentic benchmarks that combines community reports, task artifacts, agent traces, automated oracle checks, and human-gated repairs. We apply this workflow to Terminal-Bench&nbsp;2.0, a benchmark that underwent extensive human and LM-assisted review and red-teaming before release. Our audit identifies issues in roughly 30% of the benchmark, and we release the resulting repairs as Terminal-Bench&nbsp;2.1. These repairs change evaluation results: across agents, accuracy shifts by as much as 12 percentage points and leaderboard positions move by up to three ranks, even as the overall ranking remains highly correlated (Spearman ρ&nbsp;=&nbsp;0.958).</p>
+      <p>Beyond accuracy, we evaluate how resource allocation shapes benchmark conclusions. We show that fixed wall-clock and output-token budgets can materially change apparent agent performance: some large harness gaps at the default timeout shrink substantially when agents are given more time. These results show that benchmark maintenance is not only about repairing task artifacts; resource budgets are part of the measurement specification and must be validated alongside the tasks themselves.</p>
+    </div>
   </section>
 
   <section class="wrap">
     <div class="prose">
+      <p class="eyebrow">Problem</p>
+      <h2>Benchmark maintenance debt</h2>
+      <p>Agentic benchmarks are not static datasets. Terminal-Bench 2.0 went through human review, LM-assisted auditing, and exploit testing before release, yet within months its issue trackers held over 50 open reports tagged as task defects. The debt builds along two axes.</p>
+    </div>
+    <div class="pair prose">
+      <div><h3>Fidelity debt</h3><p>Task designers encode assumptions about how agents will solve a task. Those assumptions break when agents find hardcoded solutions, substring-matching exploits, or valid paths the designer did not anticipate.</p></div>
+      <div><h3>Drift debt</h3><p>Tasks that depend on external state, such as packages, APIs, or websites, break when that state changes after release, causing failures unrelated to agent capability.</p></div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="prose">
+      <p class="eyebrow">Method</p>
       <h2>A continuous-validation workflow</h2>
-      <p>A defect report does not establish its cause or justify a particular fix. Some proposed repairs clarify the task or fix the oracle; others only patch the observed symptom, for instance by relaxing a regex. Our workflow gives maintainers a consistent process for establishing defects, reviewing proposed changes, and checking that a repair preserves the intended task.</p>
+      <p>A defect report does not establish its cause or justify a particular fix. Some proposed repairs clarify the task or fix the oracle; others only patch the symptom, for instance by relaxing a regex. The workflow gives maintainers one process for establishing defects, reviewing proposed changes, and checking that a repair preserves the intended task.</p>
     </div>
-    <figure class="wide">
-      <img src="static/images/figure2_audit_pipeline.png" alt="Agentic pipeline for continuous benchmark validation: evidence collection, auditing, oracle checks, and maintainer review.">
-      <figcaption><b>Agentic pipeline for continuous benchmark validation.</b> An evidence-collector agent gathers static task files, prior agent traces, and external reports. An auditor agent applies audit principles for specification fidelity, tests, resources, and risk, then drafts a cited repair. The repair is checked against the evidence while <code>/oracle</code> rebuilds the task and runs the reference solution. The workflow can open a draft PR with the evidence attached, and maintainer review gates the verified release.</figcaption>
+    <figure class="fig">
+      <a href="static/images/figure2_audit_pipeline.png"><img src="static/images/figure2_audit_pipeline.png" alt="Agentic pipeline for continuous benchmark validation: evidence collection, auditing, oracle checks, and maintainer review."></a>
+      <figcaption><b>Agentic pipeline for continuous benchmark validation.</b> An evidence-collector agent gathers task files, prior agent traces, and external reports. An auditor agent drafts a cited repair, which is checked against the evidence while <code>/oracle</code> rebuilds the task and runs the reference solution. Maintainer review gates the release.</figcaption>
     </figure>
   </section>
 
   <section class="wrap">
     <div class="prose">
+      <p class="eyebrow">Audit findings</p>
       <h2>Where task errors come from</h2>
-      <p>We group the issues the audit surfaced into three recurring sources of maintenance debt: <span class="tag blue">instruction–verification mismatch</span> <span class="tag orange">environment issues</span> <span class="tag red">task drift</span></p>
+      <p>The issues fall into three recurring sources of maintenance debt: <span class="tag blue">instruction–verification mismatch</span>, <span class="tag orange">environment issues</span>, and <span class="tag red">task drift</span>.</p>
     </div>
-    <figure class="wide">
-      <img src="static/images/failure_sources_row.png" alt="Three panels: defect category prevalence, timeout prevalence by harness, and tasks with resource limits that were too tight.">
-      <figcaption><b>Three views of where task errors come from.</b> (a) Prevalence of defect categories in 28 Terminal-Bench 2.0 tasks; a task can have more than one. (b) Share of failed Terminal-Bench 2.1 trials that are timeouts at the default time budget, by harness. (c) Terminal-Bench 2.0 tasks whose memory or disk limit was too tight; each square is one task.</figcaption>
+    <figure class="fig">
+      <a href="static/images/failure_sources_row.png"><img src="static/images/failure_sources_row.png" alt="Three panels: defect category prevalence, timeout prevalence by harness, and tasks with resource limits that were too tight."></a>
+      <figcaption><b>Three views of where task errors come from.</b> (a) Defect categories in 28 TB2.0 tasks; a task can have more than one. (b) Share of failed TB2.1 trials that are timeouts at the default budget, by harness. (c) TB2.0 tasks whose memory or disk limit was too tight.</figcaption>
     </figure>
   </section>
 
   <section class="wrap">
-    <div class="prose">
-      <h2>Repairs move scores, not the whole leaderboard</h2>
-      <p>We re-evaluate 19 agents on both Terminal-Bench 2.0 and 2.1. Rankings stay highly correlated, but individual scores move by nontrivial margins and some agents shift by up to three leaderboard positions.</p>
-    </div>
-    <div class="split">
-      <figure>
-        <img src="static/images/leaderboard_scatter_paired_all.png" alt="Scatter of TB2.0 versus TB2.1 accuracy for 19 agents.">
-        <figcaption><b>TB2.1 changes accuracy unevenly across agents.</b> Spearman ρ = 0.958, task-bootstrap 95% CI [0.881, 0.979], across 19 agents.</figcaption>
-      </figure>
-      <figure>
-        <img src="static/images/failure_composition_tb21_all.png" alt="Horizontal bars per agent showing passed, wrong-answer, and timeout trial fractions.">
-        <figcaption><b>Trial outcomes by agent.</b> Fraction of trials that passed (green), returned a clean wrong answer (gray), or hit <code>AgentTimeoutError</code> (amber).</figcaption>
+    <div class="row">
+      <div class="row-text">
+        <p class="eyebrow">Results</p>
+        <h2>Repairs move scores, not the whole leaderboard</h2>
+        <p>We re-evaluate 19 agents on both Terminal-Bench 2.0 and 2.1. Rankings stay highly correlated, but individual scores move by up to 12 points and some agents shift by up to three leaderboard positions.</p>
+      </div>
+      <figure class="fig row-fig">
+        <a href="static/images/leaderboard_scatter_paired_all.png"><img src="static/images/leaderboard_scatter_paired_all.png" alt="Scatter of TB2.0 versus TB2.1 accuracy for 19 agents."></a>
+        <figcaption><b>TB2.1 changes accuracy unevenly across agents.</b> Spearman ρ = 0.958, task-bootstrap 95% CI [0.881, 0.979].</figcaption>
       </figure>
     </div>
   </section>
 
   <section class="wrap">
-    <div class="prose">
-      <h2>Resource budgets are part of the measurement</h2>
-      <p>Even with task feasibility restored, fixed wall-clock and output-token budgets shape the conclusions. Some large harness gaps at the default timeout mostly disappear once agents get more time.</p>
-    </div>
-    <div class="split narrow-left">
-      <figure>
-        <img src="static/images/harness_timeout_rescue_v1.png" alt="TB2.1 accuracy for Codex and Terminus-2 at the default and a 32x extended timeout.">
-        <figcaption><b>The harness gap is mostly a time-budget effect.</b> TB2.1 accuracy for Codex and Terminus-2 at the standard time budget and with timeouts extended 32×.</figcaption>
-      </figure>
-      <figure>
-        <img src="static/images/eutb_eutimeb_scaling4.png" alt="Cost-aware effectiveness curves as resource budgets increase.">
-        <figcaption><b>Cost-aware effectiveness shifts across the audit.</b> Coverage improves as resource budgets increase.</figcaption>
+    <div class="row reverse">
+      <div class="row-text">
+        <p class="eyebrow">Results</p>
+        <h2>Resource budgets are part of the measurement</h2>
+        <p>Even with task feasibility restored, fixed wall-clock and output-token budgets shape the conclusions. Most of the Codex vs. Terminus-2 gap at the default timeout closes once agents get 32× more time.</p>
+      </div>
+      <figure class="fig row-fig small">
+        <a href="static/images/harness_timeout_rescue_v1.png"><img src="static/images/harness_timeout_rescue_v1.png" alt="TB2.1 accuracy for Codex and Terminus-2 at the default and a 32x extended timeout."></a>
+        <figcaption><b>The harness gap is mostly a time-budget effect.</b> TB2.1 accuracy at the standard budget and with timeouts extended 32×.</figcaption>
       </figure>
     </div>
+    <figure class="fig narrow">
+      <a href="static/images/eutb_eutimeb_scaling4.png"><img src="static/images/eutb_eutimeb_scaling4.png" alt="Coverage curves as output-token and wall-clock budgets increase."></a>
+      <figcaption><b>Cost-aware effectiveness shifts across the audit.</b> Coverage improves as output-token and wall-clock budgets increase.</figcaption>
+    </figure>
+    <details class="more">
+      <summary>Trial outcomes for every agent</summary>
+      <figure class="fig tall">
+        <a href="static/images/failure_composition_tb21_all.png"><img src="static/images/failure_composition_tb21_all.png" alt="Horizontal bars per agent showing passed, wrong-answer, and timeout trial fractions." loading="lazy"></a>
+        <figcaption>Fraction of trials that passed (green), returned a clean wrong answer (gray), or hit <code>AgentTimeoutError</code> (amber).</figcaption>
+      </figure>
+    </details>
   </section>
 
-  <section class="wrap prose">
-    <h2>Takeaways</h2>
-    <ol class="takeaways">
-      <li>Release-time validation is necessary but not enough. Benchmarks need ongoing auditing and repair, and agentic tooling now makes that practical.</li>
-      <li>Terminal-Bench 2.1 is a checkpoint, not a terminal state. The same pipeline keeps running on every new report and pull request.</li>
-      <li>Report the resource budget with the score. Time and token limits change apparent agent performance as much as some task repairs do.</li>
-    </ol>
+  <section class="band">
+    <div class="wrap prose">
+      <h2>Takeaways</h2>
+      <ol class="takeaways">
+        <li><b>Release-time validation is not enough.</b> Benchmarks need ongoing auditing and repair, and agentic tooling now makes that practical.</li>
+        <li><b>Terminal-Bench 2.1 is a checkpoint, not a terminal state.</b> The same pipeline keeps running on every new report and pull request.</li>
+        <li><b>Report the resource budget with the score.</b> Time and token limits change apparent agent performance as much as some task repairs do.</li>
+      </ol>
+    </div>
   </section>
 
   <section class="wrap prose" id="bibtex">
