@@ -17,7 +17,6 @@
 
 <header class="hero">
   <div class="wrap">
-    <p class="venue">arXiv preprint · 2026</p>
     <h1>Benchmarks as Software:<span class="subtitle">Terminal-Bench and the Case for Continuous Benchmarks</span></h1>
 
     <ul class="authors">
@@ -37,6 +36,10 @@
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h9l5 5v15H6z M14 2v6h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
         Paper
       </a>
+      <a class="btn" href="https://arxiv.org/abs/2601.11868">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h9l5 5v15H6z M14 2v6h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        Terminal-Bench 2.0 Paper
+      </a>
       <a class="btn" href="https://github.com/harbor-framework/terminal-bench-2-1">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.56-.29-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.27 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
         Terminal-Bench 2.1
@@ -53,108 +56,65 @@
   </div>
 </header>
 
-<main>
-  <section class="wrap">
-    <figure class="fig">
-      <a href="static/images/failure_taxonomy_figure.png"><img src="static/images/failure_taxonomy_figure.png" alt="Failure surfaces along the agentic-task lifecycle, from authoring through execution and verification."></a>
-      <figcaption><b>Failure surfaces along the agentic-task lifecycle.</b> Each stage, from authoring to execution and verification, can admit a failure that adds to benchmark maintenance debt.</figcaption>
-    </figure>
+<main class="wrap">
+  <figure class="fig">
+    <a href="static/images/failure_taxonomy_figure.png"><img src="static/images/failure_taxonomy_figure.png" alt="Failure surfaces along the agentic-task lifecycle, from authoring through execution and verification."></a>
+    <figcaption>Failure surfaces along the agentic-task lifecycle. Each stage can admit a failure that adds to benchmark maintenance debt.</figcaption>
+  </figure>
 
-    <dl class="stats">
-      <div><dt>~30%</dt><dd>of Terminal-Bench 2.0 tasks had issues found by the audit</dd></div>
-      <div><dt>12 pts</dt><dd>largest accuracy shift for one agent after the repairs</dd></div>
-      <div><dt>ρ = 0.958</dt><dd>rank correlation of 19 agents between TB2.0 and TB2.1</dd></div>
-      <div><dt>&gt;50%</dt><dd>of failed trials end in a timeout, up to ~68% per harness</dd></div>
-    </dl>
+  <dl class="stats">
+    <div><dt>~30%</dt><dd>of TB2.0 tasks had issues</dd></div>
+    <div><dt>12 pts</dt><dd>largest accuracy shift</dd></div>
+    <div><dt>ρ = 0.958</dt><dd>rank correlation, 19 agents</dd></div>
+    <div><dt>&gt;50%</dt><dd>of failures are timeouts</dd></div>
+  </dl>
+
+  <section>
+    <h2>Benchmark maintenance debt</h2>
+    <p>Terminal-Bench 2.0 went through human review, LM-assisted auditing, and exploit testing before release, yet within months its issue trackers held over 50 reports of task defects. Agents find shortcuts and valid solutions the task designers did not anticipate, and tasks that depend on packages, APIs, or websites break when that state changes. Either way, the score drifts away from the capability it is meant to measure.</p>
   </section>
 
-  <section class="wrap">
-    <div class="prose">
-      <p class="eyebrow">Problem</p>
-      <h2>Benchmark maintenance debt</h2>
-      <p>Agentic benchmarks are not static datasets. Terminal-Bench 2.0 went through human review, LM-assisted auditing, and exploit testing before release, yet within months its issue trackers held over 50 open reports tagged as task defects. The debt builds along two axes.</p>
-    </div>
-    <div class="pair prose">
-      <div><h3>Fidelity debt</h3><p>Task designers encode assumptions about how agents will solve a task. Those assumptions break when agents find hardcoded solutions, substring-matching exploits, or valid paths the designer did not anticipate.</p></div>
-      <div><h3>Drift debt</h3><p>Tasks that depend on external state, such as packages, APIs, or websites, break when that state changes after release, causing failures unrelated to agent capability.</p></div>
-    </div>
-  </section>
-
-  <section class="wrap">
-    <div class="prose">
-      <p class="eyebrow">Method</p>
-      <h2>A continuous-validation workflow</h2>
-      <p>A defect report does not establish its cause or justify a particular fix. Some proposed repairs clarify the task or fix the oracle; others only patch the symptom, for instance by relaxing a regex. The workflow gives maintainers one process for establishing defects, reviewing proposed changes, and checking that a repair preserves the intended task.</p>
-    </div>
+  <section>
+    <h2>A continuous-validation workflow</h2>
+    <p>A defect report does not establish its cause or justify a fix. Our workflow combines community reports, task artifacts, agent traces, automated oracle checks, and human review to confirm each defect and check that its repair preserves the intended task.</p>
     <figure class="fig">
       <a href="static/images/figure2_audit_pipeline.png"><img src="static/images/figure2_audit_pipeline.png" alt="Agentic pipeline for continuous benchmark validation: evidence collection, auditing, oracle checks, and maintainer review."></a>
-      <figcaption><b>Agentic pipeline for continuous benchmark validation.</b> An evidence-collector agent gathers task files, prior agent traces, and external reports. An auditor agent drafts a cited repair, which is checked against the evidence while <code>/oracle</code> rebuilds the task and runs the reference solution. Maintainer review gates the release.</figcaption>
+      <figcaption>An evidence collector gathers task files, agent traces, and external reports; an auditor drafts a cited repair; <code>/oracle</code> rebuilds the task and runs the reference solution; maintainers gate the release.</figcaption>
     </figure>
   </section>
 
-  <section class="wrap">
-    <div class="prose">
-      <p class="eyebrow">Audit findings</p>
-      <h2>Where task errors come from</h2>
-      <p>The issues fall into three recurring sources of maintenance debt: <span class="tag blue">instruction–verification mismatch</span>, <span class="tag orange">environment issues</span>, and <span class="tag red">task drift</span>.</p>
-    </div>
+  <section>
+    <h2>Where task errors come from</h2>
+    <p>The audit surfaced issues in roughly 30% of the benchmark, falling into three categories: instruction–verification mismatch, environment issues, and task drift.</p>
     <figure class="fig">
       <a href="static/images/failure_sources_row.png"><img src="static/images/failure_sources_row.png" alt="Three panels: defect category prevalence, timeout prevalence by harness, and tasks with resource limits that were too tight."></a>
-      <figcaption><b>Three views of where task errors come from.</b> (a) Defect categories in 28 TB2.0 tasks; a task can have more than one. (b) Share of failed TB2.1 trials that are timeouts at the default budget, by harness. (c) TB2.0 tasks whose memory or disk limit was too tight.</figcaption>
+      <figcaption>(a) Defect categories in 28 TB2.0 tasks. (b) Share of failed TB2.1 trials that are timeouts, by harness. (c) TB2.0 tasks whose memory or disk limit was too tight.</figcaption>
     </figure>
   </section>
 
-  <section class="wrap">
-    <div class="row">
-      <div class="row-text">
-        <p class="eyebrow">Results</p>
-        <h2>Repairs move scores, not the whole leaderboard</h2>
-        <p>We re-evaluate 19 agents on both Terminal-Bench 2.0 and 2.1. Rankings stay highly correlated, but individual scores move by up to 12 points and some agents shift by up to three leaderboard positions.</p>
-      </div>
-      <figure class="fig row-fig">
-        <a href="static/images/leaderboard_scatter_paired_all.png"><img src="static/images/leaderboard_scatter_paired_all.png" alt="Scatter of TB2.0 versus TB2.1 accuracy for 19 agents."></a>
-        <figcaption><b>TB2.1 changes accuracy unevenly across agents.</b> Spearman ρ = 0.958, task-bootstrap 95% CI [0.881, 0.979].</figcaption>
-      </figure>
-    </div>
+  <section>
+    <h2>Repairs move scores, not the whole leaderboard</h2>
+    <p>Across 19 agents, accuracy shifts by up to 12 points and some agents move up to three ranks, while the overall ranking stays highly correlated.</p>
+    <figure class="fig square">
+      <a href="static/images/leaderboard_scatter_paired_all.png"><img src="static/images/leaderboard_scatter_paired_all.png" alt="Scatter of TB2.0 versus TB2.1 accuracy for 19 agents."></a>
+      <figcaption>TB2.0 vs. TB2.1 accuracy. Spearman ρ = 0.958, task-bootstrap 95% CI [0.881, 0.979].</figcaption>
+    </figure>
   </section>
 
-  <section class="wrap">
-    <div class="row reverse">
-      <div class="row-text">
-        <p class="eyebrow">Results</p>
-        <h2>Resource budgets are part of the measurement</h2>
-        <p>Even with task feasibility restored, fixed wall-clock and output-token budgets shape the conclusions. Most of the Codex vs. Terminus-2 gap at the default timeout closes once agents get 32× more time.</p>
-      </div>
-      <figure class="fig row-fig small">
-        <a href="static/images/harness_timeout_rescue_v1.png"><img src="static/images/harness_timeout_rescue_v1.png" alt="TB2.1 accuracy for Codex and Terminus-2 at the default and a 32x extended timeout."></a>
-        <figcaption><b>The harness gap is mostly a time-budget effect.</b> TB2.1 accuracy at the standard budget and with timeouts extended 32×.</figcaption>
-      </figure>
-    </div>
-    <figure class="fig narrow">
+  <section>
+    <h2>Resource budgets are part of the measurement</h2>
+    <p>Fixed wall-clock and output-token budgets change apparent performance. Most of the Codex vs. Terminus-2 gap at the default timeout closes when agents get 32× more time.</p>
+    <figure class="fig small">
+      <a href="static/images/harness_timeout_rescue_v1.png"><img src="static/images/harness_timeout_rescue_v1.png" alt="TB2.1 accuracy for Codex and Terminus-2 at the default and a 32x extended timeout."></a>
+      <figcaption>TB2.1 accuracy at the default time budget and with timeouts extended 32×.</figcaption>
+    </figure>
+    <figure class="fig">
       <a href="static/images/eutb_eutimeb_scaling4.png"><img src="static/images/eutb_eutimeb_scaling4.png" alt="Coverage curves as output-token and wall-clock budgets increase."></a>
-      <figcaption><b>Cost-aware effectiveness shifts across the audit.</b> Coverage improves as output-token and wall-clock budgets increase.</figcaption>
+      <figcaption>Coverage as output-token and wall-clock budgets increase, on TB2.0 and TB2.1.</figcaption>
     </figure>
-    <details class="more">
-      <summary>Trial outcomes for every agent</summary>
-      <figure class="fig tall">
-        <a href="static/images/failure_composition_tb21_all.png"><img src="static/images/failure_composition_tb21_all.png" alt="Horizontal bars per agent showing passed, wrong-answer, and timeout trial fractions." loading="lazy"></a>
-        <figcaption>Fraction of trials that passed (green), returned a clean wrong answer (gray), or hit <code>AgentTimeoutError</code> (amber).</figcaption>
-      </figure>
-    </details>
   </section>
 
-  <section class="band">
-    <div class="wrap prose">
-      <h2>Takeaways</h2>
-      <ol class="takeaways">
-        <li><b>Release-time validation is not enough.</b> Benchmarks need ongoing auditing and repair, and agentic tooling now makes that practical.</li>
-        <li><b>Terminal-Bench 2.1 is a checkpoint, not a terminal state.</b> The same pipeline keeps running on every new report and pull request.</li>
-        <li><b>Report the resource budget with the score.</b> Time and token limits change apparent agent performance as much as some task repairs do.</li>
-      </ol>
-    </div>
-  </section>
-
-  <section class="wrap prose" id="bibtex">
+  <section id="bibtex">
     <h2>BibTeX</h2>
     <div class="bib">
       <button type="button" class="copy" data-target="bibtex-code">Copy</button>
