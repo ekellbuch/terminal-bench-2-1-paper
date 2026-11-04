@@ -50,7 +50,11 @@ a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset:
 .authors a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--rule); }
 .authors a:hover { border-color: var(--accent); }
 .authors sup, .affils sup { color: var(--muted); font-weight: 400; }
-.affils { font-family: var(--sans); font-size: 15px; color: var(--muted); margin: 6px 0 28px; }
+.affils { display: flex; justify-content: center; align-items: center; gap: 36px; margin: 18px 0 30px; font-family: var(--sans); font-size: 14px; }
+.affils span { display: inline-flex; align-items: flex-start; gap: 3px; }
+.affils img { display: block; height: auto; }
+.logo-stanford { width: 104px; }
+.logo-cornell { width: 180px; margin-top: 2px; }
 
 .buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
 .btn {
@@ -69,6 +73,7 @@ a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset:
 main > section, main > section.wrap { padding-top: 64px; padding-bottom: 64px; }
 main > section.wrap + section.wrap { border-top: 1px solid var(--rule); }
 .band { background: var(--band); }
+main > section:first-child { padding-top: 16px; }
 .band + section { border-top: 0; }
 
 h2 { font-size: 30px; line-height: 1.2; margin: 0 0 16px; font-weight: 600; letter-spacing: -.005em; }

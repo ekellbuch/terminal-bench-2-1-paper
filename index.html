@@ -26,7 +26,10 @@
       <li><a href="https://web.stanford.edu/~swl1/">Scott W. Linderman</a><sup>1</sup></li>
       <li><a href="https://cs.stanford.edu/~chrismre/">Christopher Ré</a><sup>1</sup></li>
     </ul>
-    <p class="affils"><sup>1</sup>Stanford University &nbsp;&nbsp; <sup>2</sup>Cornell University</p>
+    <div class="affils">
+      <span><sup>1</sup><img src="static/images/stanford.svg" alt="Stanford University" class="logo-stanford"></span>
+      <span><sup>2</sup><img src="static/images/cornell.svg" alt="Cornell University" class="logo-cornell"></span>
+    </div>
 
     <nav class="buttons">
       <!-- TODO: replace with the arXiv ID once the paper is announced -->
@@ -63,15 +66,6 @@
       <div><dt>ρ = 0.958</dt><dd>rank correlation of 19 agents between TB2.0 and TB2.1</dd></div>
       <div><dt>&gt;50%</dt><dd>of failed trials end in a timeout, up to ~68% per harness</dd></div>
     </dl>
-  </section>
-
-  <section class="band">
-    <div class="wrap prose">
-      <h2>Abstract</h2>
-      <p>Coding agents are among the most economically consequential deployments of LLMs to date, so reliable evaluation matters more and more. Yet even benchmarks that are carefully validated at release can become stale. As models improve, they can discover valid solutions that existing verifiers reject, while changes to evaluation infrastructure can invalidate assumptions embedded in tasks and tests. We call the resulting accumulation of defects <em>benchmark maintenance debt</em>: a growing gap between benchmark scores and the capabilities they intend to measure.</p>
-      <p>We introduce a continuous-validation workflow for agentic benchmarks that combines community reports, task artifacts, agent traces, automated oracle checks, and human-gated repairs. We apply this workflow to Terminal-Bench&nbsp;2.0, a benchmark that underwent extensive human and LM-assisted review and red-teaming before release. Our audit identifies issues in roughly 30% of the benchmark, and we release the resulting repairs as Terminal-Bench&nbsp;2.1. These repairs change evaluation results: across agents, accuracy shifts by as much as 12 percentage points and leaderboard positions move by up to three ranks, even as the overall ranking remains highly correlated (Spearman ρ&nbsp;=&nbsp;0.958).</p>
-      <p>Beyond accuracy, we evaluate how resource allocation shapes benchmark conclusions. We show that fixed wall-clock and output-token budgets can materially change apparent agent performance: some large harness gaps at the default timeout shrink substantially when agents are given more time. These results show that benchmark maintenance is not only about repairing task artifacts; resource budgets are part of the measurement specification and must be validated alongside the tasks themselves.</p>
-    </div>
   </section>
 
   <section class="wrap">

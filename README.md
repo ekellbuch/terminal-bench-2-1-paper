@@ -7,3 +7,6 @@ Figures in `static/images/` are rasterized from `tbench_arxiv/tables_and_figures
 with `pdftoppm -png -r 220 -singlefile` followed by `magick mogrify -trim -resize '2400x>'`.
 
 Once the paper is on arXiv, replace `XXXX.XXXXX` in `index.html` (Paper button and BibTeX).
+
+Logos in `static/images/` come from Wikimedia Commons: `stanford.svg` is
+"Stanford wordmark (2012).svg" and `cornell.svg` is "Cornell University logo.svg".
