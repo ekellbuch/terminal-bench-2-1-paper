@@ -8,7 +8,8 @@ with `pdftoppm -png -r 220 -singlefile` followed by `magick mogrify -trim -resiz
 
 Until the paper is on arXiv, the Paper button serves `static/paper_workshop.pdf`, the DL4C @ ICML 2026
 camera-ready built from `bench2_overleaf` commit 3850172 ("draft v0 submitted"). Once announced, point
-the Paper button at the arXiv abstract and replace `XXXX.XXXXX` in the BibTeX.
+the Paper button at the arXiv abstract. The BibTeX is the DL4C workshop entry as Google Scholar lists it
+(title, authors, booktitle copied from its citation popup).
 
 Logos in `static/images/` come from Wikimedia Commons: `stanford.svg` is
 "Stanford wordmark (2012).svg" and `cornell.svg` is "Cornell University logo.svg".
