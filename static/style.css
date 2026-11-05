@@ -45,6 +45,9 @@ a { color: var(--accent); text-underline-offset: 2px; }
 .logo-stanford { width: 104px; }
 .logo-cornell { width: 180px; margin-top: 2px; }
 
+.credit { font-family: var(--sans); font-size: 15px; color: var(--muted); margin: -12px 0 28px; }
+.credit a { color: var(--ink); font-weight: 500; }
+
 .buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
 .btn {
   display: inline-flex; align-items: center; gap: 8px;
