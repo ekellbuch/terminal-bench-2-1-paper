@@ -6,9 +6,7 @@ Plain static HTML; served by GitHub Pages from the `main` branch root.
 Figures in `static/images/` are rasterized from `tbench_arxiv/tables_and_figures/figures/*.pdf`
 with `pdftoppm -png -r 220 -singlefile` followed by `magick mogrify -trim -resize '2400x>'`.
 
-Until the paper is on arXiv, the Paper button serves `static/paper_workshop.pdf`, the DL4C @ ICML 2026
-camera-ready built from `bench2_overleaf` commit 3850172 ("draft v0 submitted"). Once announced, point
-the Paper button at the arXiv abstract. The BibTeX is the DL4C workshop entry as Google Scholar lists it
+The BibTeX is the DL4C workshop entry as Google Scholar lists it
 (title, authors, booktitle copied from its citation popup).
 
 Logos in `static/images/` come from Wikimedia Commons: `stanford.svg` is
