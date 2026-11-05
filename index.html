@@ -53,6 +53,9 @@
 </header>
 
 <main class="wrap">
+  <section class="lead">
+    <h2>Benchmark maintenance debt</h2>
+  </section>
   <figure class="fig">
     <a href="static/images/failure_taxonomy_figure.png"><img src="static/images/failure_taxonomy_figure.png" alt="Failure surfaces along the agentic-task lifecycle, from authoring through execution and verification."></a>
     <figcaption>Failure surfaces along the agentic-task lifecycle. Each stage can admit a failure that adds to benchmark maintenance debt.</figcaption>
@@ -64,11 +67,6 @@
     <div><dt>ρ = 0.958</dt><dd>rank correlation, 19 agents</dd></div>
     <div><dt>&gt;50%</dt><dd>of failures are timeouts</dd></div>
   </dl>
-
-  <section>
-    <h2>Benchmark maintenance debt</h2>
-    <p>Terminal-Bench 2.0 went through human review, LM-assisted auditing, and exploit testing before release, yet within months its issue trackers held over 50 reports of task defects. Agents find shortcuts and valid solutions the task designers did not anticipate, and tasks that depend on packages, APIs, or websites break when that state changes. Either way, the score drifts away from the capability it is meant to measure.</p>
-  </section>
 
   <section>
     <h2>A continuous-validation workflow</h2>
