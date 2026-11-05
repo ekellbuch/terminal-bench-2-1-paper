@@ -58,6 +58,15 @@
 
 <main class="wrap">
   <section class="lead">
+    <h2>Terminal-Bench 2.1: Repairs move scores, not the whole leaderboard</h2>
+    <p>Across 19 agents, accuracy shifts by up to 12 points and some agents move up to three ranks, while the overall ranking stays highly correlated.</p>
+    <figure class="fig square">
+      <a href="static/images/leaderboard_scatter_paired_all.png"><img src="static/images/leaderboard_scatter_paired_all.png" alt="Scatter of TB2.0 versus TB2.1 accuracy for 19 agents."></a>
+      <figcaption>TB2.0 vs. TB2.1 accuracy. Spearman ρ = 0.958, task-bootstrap 95% CI [0.881, 0.979].</figcaption>
+    </figure>
+  </section>
+
+  <section>
     <h2>Benchmark maintenance debt</h2>
     <p>Failure surfaces along the agentic-task lifecycle. Each stage can admit a failure that adds to benchmark maintenance debt.</p>
   </section>
@@ -87,15 +96,6 @@
     <figure class="fig">
       <a href="static/images/failure_sources_row.png"><img src="static/images/failure_sources_row.png" alt="Three panels: defect category prevalence, timeout prevalence by harness, and tasks with resource limits that were too tight."></a>
       <figcaption>(a) Defect categories in 28 TB2.0 tasks. (b) Share of failed TB2.1 trials that are timeouts, by harness. (c) TB2.0 tasks whose memory or disk limit was too tight.</figcaption>
-    </figure>
-  </section>
-
-  <section>
-    <h2>Terminal-Bench 2.1: Repairs move scores, not the whole leaderboard</h2>
-    <p>Across 19 agents, accuracy shifts by up to 12 points and some agents move up to three ranks, while the overall ranking stays highly correlated.</p>
-    <figure class="fig square">
-      <a href="static/images/leaderboard_scatter_paired_all.png"><img src="static/images/leaderboard_scatter_paired_all.png" alt="Scatter of TB2.0 versus TB2.1 accuracy for 19 agents."></a>
-      <figcaption>TB2.0 vs. TB2.1 accuracy. Spearman ρ = 0.958, task-bootstrap 95% CI [0.881, 0.979].</figcaption>
     </figure>
   </section>
 
