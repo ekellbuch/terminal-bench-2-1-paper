@@ -74,7 +74,7 @@
 
   <section>
     <h2>A continuous-validation workflow</h2>
-    <p>A defect report does not establish its cause or justify a fix. Our workflow combines community reports, task artifacts, agent traces, automated oracle checks, and human review to confirm each defect and check that its repair preserves the intended task.</p>
+    <p>This debt keeps accumulating after release, so a benchmark has to be validated continuously, not once. A defect report alone does not establish its cause or justify a fix. Our workflow combines community reports, task artifacts, agent traces, automated oracle checks, and human review to confirm each defect, then checks that the repair preserves what the task was meant to measure.</p>
     <figure class="fig">
       <a href="static/images/figure2_audit_pipeline.png"><img src="static/images/figure2_audit_pipeline.png" alt="Agentic pipeline for continuous benchmark validation: evidence collection, auditing, oracle checks, and maintainer review."></a>
       <figcaption>An evidence collector gathers task files, agent traces, and external reports; an auditor drafts a cited repair; <code>/oracle</code> rebuilds the task and runs the reference solution; maintainers gate the release.</figcaption>
